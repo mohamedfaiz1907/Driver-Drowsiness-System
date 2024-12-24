@@ -1,0 +1,35 @@
+# Function to Initialize Arduino Coding:-
+------------------------------------------------------------------------------------------------------------------------
+arduinoData = serial.Serial('/dev/ttyACM0',9600) 
+def led_on(): 
+    arduinoData.write(b'1') 
+13 
+def led_off(): 
+    arduinoData.write(b'0')
+
+
+#Arduino Script using Pyserial package:-
+-----------------------------------------------------------------------------------------------------------------------
+char serialData; 
+int lightPin = 13; 
+int soundPin = 10; 
+void setup() { 
+  // put your setup code here, to run once: 
+  pinMode(lightPin,OUTPUT); 
+  pinMode(soundPin,OUTPUT); 
+  Serial.begin(9600); 
+} 
+void loop() { 
+  // put your main code here, to run repeatedly: 
+  if(Serial.available()>0){ 
+    serialData = Serial.read(); 
+  Serial.print(serialData); 
+    if (serialData=='1'){ 
+      digitalWrite(lightPin,HIGH); 
+      digitalWrite(soundPin,HIGH); 
+    } 
+    else if(serialData == '0') 
+      digitalWrite(lightPin,LOW); 
+      digitalWrite(soundPin,HIGH); 
+  } 
+}
